@@ -1,0 +1,127 @@
+/* Base styling */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(to right, #e0eafc, #cfdef3);
+  margin: 0;
+  padding: 0;
+}
+
+/* Chat container */
+.container {
+  max-width: 600px;
+  margin: 50px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border: 2px solid #000;
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #222;
+  margin-bottom: 20px;
+}
+
+/* Chat box */
+#chat-box {
+  height: 400px;
+  overflow-y: auto;
+  border: 2px solid #000;
+  padding: 16px;
+  margin-bottom: 15px;
+  background: #f9f9f9;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* User message */
+.message.user {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+  text-align: right;
+  border: 2px solid #198754;
+  padding: 5px;
+  border-radius: 10px;
+  animation: fadeInSlide 0.4s ease-out;
+  transition: all 0.3s ease;
+}
+
+/* Kai message */
+.message.kai {
+  background-color: #f1f1f1;
+  align-self: flex-start;
+  text-align: left;
+  border: 2px solid black;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 10px 0;
+  animation: fadeInSlide 0.4s ease-out;
+  transition: all 0.3s ease;
+}
+
+/* Entry animation */
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Chat form layout */
+form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Text input */
+input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 2px solid #000;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+/* File input (hidden but styled with label) */
+input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  background: #6c757d;
+  color: #fff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.3s ease;
+}
+
+.file-label:hover {
+  background: #5a6268;
+}
+
+/* Submit button */
+button {
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #0056b3;
+}
