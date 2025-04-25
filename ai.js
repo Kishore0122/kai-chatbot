@@ -9,7 +9,6 @@ const fileInput = document.getElementById("file-input");
 
 let chatHistory = JSON.parse(localStorage.getItem("chatHistory")) || [];
 
-// Load existing messages on page load
 window.addEventListener("DOMContentLoaded", () => {
   chatHistory.forEach(({ sender, text }) => addMessage(sender, text));
 });
@@ -24,11 +23,11 @@ async function handleSubmit(e) {
 
   if (!userMessage && !file) return;
 
-  // Show user text message
-  if (userMessage) addMessage("user", userMessage);
+  // Show user message with animation
+  if (userMessage) addMessage("user", userMessage, "typing");
 
   // Show uploaded file name
-  if (file) addMessage("user", `📎 Uploaded: ${file.name}`);
+  if (file) addMessage("user", `📎 Uploaded: ${file.name}`, "file");
 
   textInput.value = "";
   fileInput.value = "";
@@ -62,13 +61,13 @@ async function handleSubmit(e) {
 
     if (response.ok && data.candidates?.length) {
       const botReply = data.candidates[0].content.parts[0].text;
-      addMessage("kai", botReply);
+      addMessage("kai", botReply, "response");
     } else {
-      addMessage("kai", "⚠️ We will implement file reading as soon as possible.");
+      addMessage("kai", "⚠️ Something went wrong. Please try again later.", "error");
     }
   } catch (err) {
     console.error("Error:", err);
-    addMessage("kai", "❌ Something went wrong. See console for details.");
+    addMessage("kai", "❌ An error occurred. See the console for details.", "error");
   }
 }
 
@@ -81,9 +80,9 @@ function fileToBase64(file) {
   });
 }
 
-function addMessage(sender, text) {
+function addMessage(sender, text, type = "normal") {
   const msg = document.createElement("div");
-  msg.className = `message ${sender}`;
+  msg.className = `message ${sender} ${type}`;
 
   const formattedText = text
     .split("\n\n")
@@ -98,9 +97,9 @@ function addMessage(sender, text) {
   chatHistory.push({ sender, text });
   localStorage.setItem("chatHistory", JSON.stringify(chatHistory));
 }
+
 function clearChat() {
   localStorage.removeItem("chatHistory");
   chatBox.innerHTML = "";
   chatHistory = [];
-  }
-  
+}
